@@ -137,3 +137,12 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+
+backend/alembic/__pycache__/*
+backend/.venv/*
+backend/app/__pycache__/*
+
+*.pyc
+
+
