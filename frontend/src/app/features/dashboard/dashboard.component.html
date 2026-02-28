@@ -1,0 +1,100 @@
+<div class="dashboard">
+
+  <!-- ── Portfolio Summary ── -->
+  <section class="section">
+    <h2>Portfolio Summary</h2>
+    @if (summary) {
+      <div class="summary-cards">
+        <div class="card">
+          <span class="card-label">Total Invested</span>
+          <span class="card-value">${{ summary.total_invested | number:'1.2-2' }}</span>
+        </div>
+        <div class="card">
+          <span class="card-label">Market Value</span>
+          <span class="card-value">${{ summary.total_market_value | number:'1.2-2' }}</span>
+        </div>
+        <div class="card" [class.positive]="summary.unrealized_gain_loss >= 0" [class.negative]="summary.unrealized_gain_loss < 0">
+          <span class="card-label">Unrealized Gain / Loss</span>
+          <span class="card-value">
+            {{ summary.unrealized_gain_loss >= 0 ? '+' : '' }}${{ summary.unrealized_gain_loss | number:'1.2-2' }}
+            ({{ gainLossPct | number:'1.2-2' }}%)
+          </span>
+        </div>
+      </div>
+    } @else {
+      <p>Loading summary...</p>
+    }
+  </section>
+
+  <hr>
+
+  <!-- ── Add Transaction ── -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Add Transaction</h2>
+      <button class="toggle-btn" (click)="showTransactionForm = !showTransactionForm">
+        {{ showTransactionForm ? 'Hide Form' : 'New Transaction' }}
+      </button>
+    </div>
+    @if (showTransactionForm) {
+      <app-transaction-form (submitted)="onTransactionSubmitted()" />
+    }
+  </section>
+
+  <hr>
+
+  <!-- ── Holdings Table ── -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Holdings</h2>
+      <button class="toggle-btn" (click)="showAddHoldingForm = !showAddHoldingForm">
+        {{ showAddHoldingForm ? 'Hide Form' : '+ Add Holding' }}
+      </button>
+    </div>
+    @if (showAddHoldingForm) {
+      <div class="add-holding-wrapper">
+        <app-add-holding-form (holdingAdded)="onHoldingAdded()" />
+      </div>
+    }
+    <app-holdings-table [holdings]="holdings" (priceUpdated)="onPriceUpdated()" />
+  </section>
+
+  <hr>
+
+  <!-- ── Recent Transactions ── -->
+  <section class="section">
+    <h2>Recent Transactions</h2>
+    @if (!transactions.length) {
+      <p>No transactions yet.</p>
+    }
+    @if (transactions.length) {
+      <table class="tx-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Type</th>
+            <th>Symbol</th>
+            <th>Company</th>
+            <th>Qty</th>
+            <th>Price</th>
+            <th>Total Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (tx of transactions; track tx.id) {
+            <tr>
+              <td>{{ tx.timestamp | date:'MMM d, y, h:mm a' }}</td>
+              <td [class]="tx.type === 'BUY' ? 'buy' : 'sell'">{{ tx.type }}</td>
+              <td><strong>{{ tx.symbol }}</strong></td>
+              <td>{{ tx.company_name || '—' }}</td>
+              <td>{{ tx.quantity }}</td>
+              <td>${{ tx.price | number:'1.2-2' }}</td>
+              <td>${{ (tx.quantity * tx.price) | number:'1.2-2' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  </section>
+
+</div>

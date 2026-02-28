@@ -1,0 +1,115 @@
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.section {
+  margin-bottom: 8px;
+}
+
+.add-holding-wrapper {
+  margin-bottom: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+  color: #1a237e;
+}
+
+hr {
+  margin: 24px 0;
+  border: none;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Summary Cards */
+.summary-cards {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  flex: 1;
+  min-width: 180px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 16px 20px;
+  background: #fafafa;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-label {
+  font-size: 0.8rem;
+  color: #757575;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.card-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #212121;
+}
+
+.card.positive { border-left: 4px solid #2e7d32; }
+.card.positive .card-value { color: #2e7d32; }
+.card.negative { border-left: 4px solid #c62828; }
+.card.negative .card-value { color: #c62828; }
+
+/* Toggle button */
+.toggle-btn {
+  padding: 7px 16px;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  background: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.toggle-btn:hover { background: #e3f2fd; }
+
+/* Recent Transactions table */
+.tx-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.tx-table th,
+.tx-table td {
+  padding: 9px 12px;
+  border: 1px solid #e0e0e0;
+  text-align: right;
+}
+
+.tx-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  text-align: center;
+}
+
+.tx-table td:first-child,
+.tx-table td:nth-child(3),
+.tx-table td:nth-child(4) { text-align: left; }
+
+.buy  { color: #1565c0; font-weight: 700; text-align: center !important; }
+.sell { color: #c62828; font-weight: 700; text-align: center !important; }
